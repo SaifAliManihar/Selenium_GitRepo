@@ -96,8 +96,10 @@ public class TestBase {
 //		htmlReporter.config().setTheme(Theme.STANDARD);
 		
 		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")+"\\test-output\\Test_Automaton_Report_"+getCurrentTime()+".html");
-		htmlReporter.config().setDocumentTitle("Automation Report"); // Tile of report
-		htmlReporter.config().setReportName("Functional Testing"); // Name of the report
+		htmlReporter.config().setChartVisibilityOnOpen(true);
+		htmlReporter.config().setDocumentTitle("Automation Test Report for Salesforce App");
+		htmlReporter.config().setReportName("Test Report for Salesforce App");//testContext.getName()+
+		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
 		htmlReporter.config().setTheme(Theme.STANDARD);
 
 		extent = new ExtentReports();
@@ -115,10 +117,10 @@ public class TestBase {
 		extent.flush();
 	}
 	
-	@AfterTest
-	public void closeEnv(){
-		TestUtil.closeBrowser(driver);
-	}
+//	@AfterTest
+//	public void closeEnv(){
+//		TestUtil.closeBrowser(driver);
+//	}
 	
 	@AfterMethod
 	public void getResult(ITestResult result) {
@@ -133,6 +135,7 @@ public class TestBase {
 			MarkupHelper.createLabel(result.getName() + " Test Case SKIPPED", ExtentColor.ORANGE));
 			test.skip(result.getThrowable());
 		}
+		TestUtil.closeBrowser(driver);
 	}
 	
 	
