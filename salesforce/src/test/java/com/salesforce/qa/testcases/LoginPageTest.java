@@ -22,6 +22,7 @@ public class LoginPageTest extends TestBase{
 	@BeforeMethod
 	public void setUp()
 	{
+		test = extent.createTest("Login Functionality Testing");
 		initialization();
 		loginpage = new LoginPage();
 		util = new TestUtil();
@@ -30,11 +31,8 @@ public class LoginPageTest extends TestBase{
 	@Test(priority=1)
 	public void loginTest() throws Exception
 	{
-		test = extent.createTest("Login Functionality Testing");
 		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));
-		Thread.sleep(20000);
-		driver.navigate().refresh();
-		Thread.sleep(2000);
+		Thread.sleep(12000);
 		loginpage.logOffAccount();
 	}
 	

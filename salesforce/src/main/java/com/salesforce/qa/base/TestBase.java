@@ -14,6 +14,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -37,6 +38,7 @@ public class TestBase {
 	public static ExtentReports extent;
 	public static ExtentTest test;
 	private static ITestContext testContext;
+	private ITestResult result;
 	
 	public static String filePath = System.getProperty("user.dir");
 	public TestBase()
@@ -82,21 +84,45 @@ public class TestBase {
 	@BeforeSuite
 	public void beforeSuiteSetUp() {
 		//testContext.getName()+
-		String reportFileName = "Test_Automaton_Report_"+getCurrentTime();//testContext.getName()+
-		htmlReporter = new ExtentHtmlReporter(filePath + "\\test-output\\"+reportFileName+".html");
+//		String reportFileName = "Test_Automaton_Report_"+getCurrentTime();//testContext.getName()+
+//		htmlReporter = new ExtentHtmlReporter(filePath + "\\test-output\\"+reportFileName+".html");
+//		extent = new ExtentReports();
+//		extent.attachReporter(htmlReporter);
+//		
+//		htmlReporter.config().setChartVisibilityOnOpen(true);
+//		htmlReporter.config().setDocumentTitle("Automation Test Report for Salesforce App");
+//		htmlReporter.config().setReportName("Test Report for Salesforce App");//testContext.getName()+
+//		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
+//		htmlReporter.config().setTheme(Theme.STANDARD);
+		
+		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")+"\\test-output\\Test_Automaton_Report_"+getCurrentTime()+".html");
+		htmlReporter.config().setDocumentTitle("Automation Report"); // Tile of report
+		htmlReporter.config().setReportName("Functional Testing"); // Name of the report
+		htmlReporter.config().setTheme(Theme.STANDARD);
+
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
-		
-		htmlReporter.config().setChartVisibilityOnOpen(true);
-		htmlReporter.config().setDocumentTitle("Automation Test Report for Salesforce App");
-		htmlReporter.config().setReportName("Test Report for Salesforce App");//testContext.getName()+
-		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
-		htmlReporter.config().setTheme(Theme.STANDARD);
+		extent.setSystemInfo("User name",System.getProperty("user.name"));
+		extent.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
+		extent.setSystemInfo("User Location", System.getProperty("user.country"));
+		extent.setSystemInfo("OS name", System.getProperty("os.name"));
+		extent.setSystemInfo("OS version", System.getProperty("os.version"));
+		extent.setSystemInfo("JDK version",System.getProperty("java.version"));
+	}
+	
+	@AfterSuite
+	public void tearDown() {
+		extent.flush();
+	}
+	
+	@AfterTest
+	public void closeEnv(){
+		TestUtil.closeBrowser(driver);
 	}
 	
 	@AfterMethod
 	public void getResult(ITestResult result) {
-		test=extent.createTest(result.getName());
+		//test=extent.createTest(result.getName());
 		if (result.getStatus() == ITestResult.FAILURE) {
 			test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " Test case FAILED due to below issues:",	ExtentColor.RED));
 			test.fail(result.getThrowable());
@@ -109,10 +135,7 @@ public class TestBase {
 		}
 	}
 	
-	@AfterSuite
-	public void tearDown() {
-		extent.flush();
-	}
+	
 	
 	
 }

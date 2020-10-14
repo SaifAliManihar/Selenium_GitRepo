@@ -24,6 +24,7 @@ public class AccountPageTest extends TestBase{
 	@BeforeMethod
 	public void setUp() throws Exception
 	{
+		test = extent.createTest("Create Account And Edit Acount");
 		initialization();
 		loginpage = new LoginPage();
 		util = new TestUtil();
@@ -35,8 +36,6 @@ public class AccountPageTest extends TestBase{
 	@Test(priority=1)
 	public void verifyAccountCreationAndEdit() throws Exception
 	{
-		test = extent.createTest("Create Account And Edit Acount Scenario Testing");
-		
 		account.verifyAccountTab();
 		Thread.sleep(10000);
 		

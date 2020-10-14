@@ -1,6 +1,8 @@
 package com.salesforce.qa.util;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -224,7 +228,7 @@ public class TestUtil extends TestBase{
 		return webElementList;
 	}
 	
-	public void closeBrowser()
+	public static void closeBrowser(WebDriver driver)
 	{
 		driver.quit();
 	}
@@ -239,5 +243,26 @@ public class TestUtil extends TestBase{
 	{
 		driver.navigate().refresh();
 	}
+	
+//	public static String getScreenshot(WebDriver driver)
+//	{
+//		TakesScreenshot ts=(TakesScreenshot) driver;
+//		
+//		File src=ts.getScreenshotAs(OutputType.FILE);
+//		
+//		String path=System.getProperty("user.dir")+"/Screenshot/"+System.currentTimeMillis()+".png";
+//		
+//		File destination=new File(path);
+//		
+//		try 
+//		{
+//			FileHandler.copyFile(src, destination);
+//		} catch (IOException e) 
+//		{
+//			System.out.println("Capture Failed "+e.getMessage());
+//		}
+//		
+//		return path;
+//	}
 	
 }

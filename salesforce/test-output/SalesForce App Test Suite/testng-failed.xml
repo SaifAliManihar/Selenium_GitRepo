@@ -6,12 +6,23 @@
       <class name="com.salesforce.qa.testcases.AccountPageTest">
         <methods>
           <include name="verifyAccountCreationAndEdit"/>
+          <include name="closeEnv"/>
           <include name="getResult"/>
           <include name="beforeSuiteSetUp"/>
           <include name="tearDown"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- com.salesforce.qa.testcases.AccountPageTest -->
+      <class name="com.salesforce.qa.testcases.LoginPageTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="loginTest"/>
+          <include name="closeEnv"/>
+          <include name="getResult"/>
+          <include name="beforeSuiteSetUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.salesforce.qa.testcases.LoginPageTest -->
     </classes>
   </test> <!-- Salesforce App Test Cases(failed) -->
 </suite> <!-- Failed suite [SalesForce App Test Suite] -->

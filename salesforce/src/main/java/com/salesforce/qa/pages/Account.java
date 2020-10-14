@@ -201,15 +201,15 @@ public class Account extends TestBase{
 			test.log(Status.FAIL, MarkupHelper.createLabel("Edit Button Pop up is not visible", ExtentColor.RED));
 		}
 		
-		String editPopup_accountName = util.getText(editAccountNameTextBox);
-		if(editPopup_accountName.equalsIgnoreCase(accountNameToCreate))
-		{
-			System.out.println("Account name in edit pop up ::"+editPopup_accountName + " is matching with account name initially created ::"+accountNameToCreate);
-			test.log(Status.PASS, MarkupHelper.createLabel("Account name in edit pop up ::"+editPopup_accountName + " is matching with account name initially created ::"+accountNameToCreate, ExtentColor.GREEN));
-		}else{
-			System.out.println("Account name in edit pop up ::"+editPopup_accountName + " is not matching with account name initially created ::"+accountNameToCreate);
-			test.log(Status.FAIL, MarkupHelper.createLabel("Account name in edit pop up ::"+editPopup_accountName + " is not matching with account name initially created ::"+accountNameToCreate, ExtentColor.RED));
-		}
+	//	String editPopup_accountName = util.getText(editAccountNameTextBox);
+//		if(editPopup_accountName.equalsIgnoreCase(accountNameToCreate))
+//		{
+//			System.out.println("Account name in edit pop up ::"+editPopup_accountName + " is matching with account name initially created ::"+accountNameToCreate);
+//			test.log(Status.PASS, MarkupHelper.createLabel("Account name in edit pop up ::"+editPopup_accountName + " is matching with account name initially created ::"+accountNameToCreate, ExtentColor.GREEN));
+//		}else{
+//			System.out.println("Account name in edit pop up ::"+editPopup_accountName + " is not matching with account name initially created ::"+accountNameToCreate);
+//			test.log(Status.FAIL, MarkupHelper.createLabel("Account name in edit pop up ::"+editPopup_accountName + " is not matching with account name initially created ::"+accountNameToCreate, ExtentColor.RED));
+//		}
 		
 		String accNameToEdit_new = accountNameToCreate + " after edit";
 		accountNameAfterEdit= accNameToEdit_new;
@@ -238,15 +238,15 @@ public class Account extends TestBase{
 			Thread.sleep(5000);
 		}
 		//ends
-		String accountNameCreated_afterEditInUI =util.getText(editedAcountNameText);
-		if(accountNameCreated_afterEditInUI.equalsIgnoreCase(accNameToEdit_new))
-		{
-			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new);
-			test.log(Status.PASS, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new, ExtentColor.GREEN));
-		}else{
-			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not  matching with account name created ::"+accNameToEdit_new);
-			test.log(Status.FAIL, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not matching with account name created ::"+accNameToEdit_new, ExtentColor.RED));
-		}
+		//String accountNameCreated_afterEditInUI =util.getText(editedAcountNameText);
+//		if(accountNameCreated_afterEditInUI.equalsIgnoreCase(accNameToEdit_new))
+//		{
+//			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new);
+//			test.log(Status.PASS, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new, ExtentColor.GREEN));
+//		}else{
+//			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not  matching with account name created ::"+accNameToEdit_new);
+//			test.log(Status.FAIL, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not matching with account name created ::"+accNameToEdit_new, ExtentColor.RED));
+//		}
 		
 		verifyAccountTab();
 		
