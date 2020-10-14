@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [SalesForce App Test Suite]">
+  <test name="Salesforce App Test Cases(failed)">
+    <classes>
+      <class name="com.salesforce.qa.testcases.AccountPageTest">
+        <methods>
+          <include name="verifyAccountCreationAndEdit"/>
+          <include name="getResult"/>
+          <include name="beforeSuiteSetUp"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.salesforce.qa.testcases.AccountPageTest -->
+    </classes>
+  </test> <!-- Salesforce App Test Cases(failed) -->
+</suite> <!-- Failed suite [SalesForce App Test Suite] -->
