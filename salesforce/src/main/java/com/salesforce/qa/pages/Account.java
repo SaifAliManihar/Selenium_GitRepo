@@ -51,7 +51,7 @@ public class Account extends TestBase{
 	
 	By accountNameList = By.xpath("//table[contains(@class,'uiVirtualDataTable')]//th[@scope='row']//a");
 	
-	By editedAcountNameText = By.xpath("//div[contains(@class,'label-container') and contains(.,'Account Name')]//following-sibling::div");
+	By editedAcountNameText = By.xpath("//div[contains(@class,'label-container') and contains(.,'Account Name')]//following-sibling::div//lightning-formatted-text");
 		
 	By detailsButton = By.xpath("(//ul[@role='tablist'])[1]//li[contains(.,'Details')]");
 	
@@ -201,7 +201,7 @@ public class Account extends TestBase{
 			test.log(Status.FAIL, MarkupHelper.createLabel("Edit Button Pop up is not visible", ExtentColor.RED));
 		}
 		
-	//	String editPopup_accountName = util.getText(editAccountNameTextBox);
+//		String editPopup_accountName = util.getText(editAccountNameTextBox);
 //		if(editPopup_accountName.equalsIgnoreCase(accountNameToCreate))
 //		{
 //			System.out.println("Account name in edit pop up ::"+editPopup_accountName + " is matching with account name initially created ::"+accountNameToCreate);
@@ -238,15 +238,15 @@ public class Account extends TestBase{
 			Thread.sleep(5000);
 		}
 		//ends
-		//String accountNameCreated_afterEditInUI =util.getText(editedAcountNameText);
-//		if(accountNameCreated_afterEditInUI.equalsIgnoreCase(accNameToEdit_new))
-//		{
-//			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new);
-//			test.log(Status.PASS, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new, ExtentColor.GREEN));
-//		}else{
-//			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not  matching with account name created ::"+accNameToEdit_new);
-//			test.log(Status.FAIL, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not matching with account name created ::"+accNameToEdit_new, ExtentColor.RED));
-//		}
+		String accountNameCreated_afterEditInUI =util.getText(editedAcountNameText);
+		if(accountNameCreated_afterEditInUI.equalsIgnoreCase(accNameToEdit_new))
+		{
+			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new);
+			test.log(Status.PASS, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is matching with account name created ::"+accNameToEdit_new, ExtentColor.GREEN));
+		}else{
+			System.out.println("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not  matching with account name created ::"+accNameToEdit_new);
+			test.log(Status.FAIL, MarkupHelper.createLabel("Account name in UI ::"+ accountNameCreated_afterEditInUI + " is not matching with account name created ::"+accNameToEdit_new, ExtentColor.RED));
+		}
 		
 		verifyAccountTab();
 		

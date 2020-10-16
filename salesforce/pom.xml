@@ -16,6 +16,43 @@
                  <maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
 	
+	<build>
+		<plugins>
+			<!-- Compiler plug-in -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.level}</source>
+					<target>${jdk.level}</target>
+				</configuration>
+			</plugin>
+			<!-- Below plug-in is used to execute tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>
+								test
+							</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<forkCount>0</forkCount>
+					<suiteXmlFiles>
+						<!-- TestNG suite XML files -->
+						<suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
@@ -51,9 +88,6 @@
 		    <artifactId>freemarker</artifactId>
 		    <version>2.3.28</version>
 		</dependency>
-		
-
-		
 		
 	</dependencies>
   

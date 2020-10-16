@@ -26,14 +26,12 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.salesforce.qa.util.TestUtil;
-import com.salesforce.qa.util.WebEventListener;
 
 public class TestBase {
 	
 	public static WebDriver driver;
 	public static Properties prop;
 	public static EventFiringWebDriver e_driver;
-	public static WebEventListener eventListener;
 	public static ExtentHtmlReporter htmlReporter;
 	public static ExtentReports extent;
 	public static ExtentTest test;
@@ -104,7 +102,7 @@ public class TestBase {
 
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
-		extent.setSystemInfo("User name",System.getProperty("user.name"));
+		//extent.setSystemInfo("User name",System.getProperty("user.name"));
 		extent.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
 		extent.setSystemInfo("User Location", System.getProperty("user.country"));
 		extent.setSystemInfo("OS name", System.getProperty("os.name"));

@@ -64,6 +64,7 @@ public class AccountPageTest extends TestBase{
 		Thread.sleep(7000);
 		
 		util.refreshBrowser();
+		Thread.sleep(2000);
 		loginpage.logOffAccount();
 	}
 	

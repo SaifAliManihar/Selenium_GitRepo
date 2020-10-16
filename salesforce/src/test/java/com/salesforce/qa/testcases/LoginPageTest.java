@@ -32,7 +32,9 @@ public class LoginPageTest extends TestBase{
 	public void loginTest() throws Exception
 	{
 		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));
-		Thread.sleep(12000);
+		Thread.sleep(20000);
+		util.refreshBrowser();
+		Thread.sleep(4000);
 		loginpage.logOffAccount();
 	}
 	
