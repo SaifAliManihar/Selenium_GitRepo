@@ -41,7 +41,7 @@ public class Account extends TestBase{
 	
 	By accountNameLabel = By.xpath("//div[contains(@class,'outputNameWithHierarchyIcon')]//span[contains(@class,'uiOutputText')]");
 	
-	By editButton = By.xpath("//a[@title='Edit']");
+	By editButton = By.xpath("//button[@name='Edit']");
 	
 	By editButtonPopUpLabel = By.xpath("//h2[contains(.,'Edit')]");
 		
