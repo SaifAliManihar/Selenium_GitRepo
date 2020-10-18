@@ -42,7 +42,7 @@ public class LoginPage extends TestBase {
 	public void logOffAccount() throws Exception
 	{
 		util.clickElement(accountLogOff_Logo, "Log off Logo");
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		
 		util.clickElement(accountLogOff_LogOutLink, "Log Out Link");
 		util.waitForPageLoaded(30);
