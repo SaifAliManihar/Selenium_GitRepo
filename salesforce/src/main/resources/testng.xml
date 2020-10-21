@@ -7,8 +7,8 @@
      
   <test name="Salesforce App Test Cases">
   	<classes>
-     	<!-- <class name="com.salesforce.qa.testcases.LoginPageTest"/>
-      	<class name="com.salesforce.qa.testcases.AccountPageTest"/> -->
+     	<class name="com.salesforce.qa.testcases.LoginPageTest"/>
+      	<class name="com.salesforce.qa.testcases.AccountPageTest"/>
       	<class name="com.salesforce.qa.testcases.SetUpTest_ObjectRepository"/>
       </classes>
   </test> 
