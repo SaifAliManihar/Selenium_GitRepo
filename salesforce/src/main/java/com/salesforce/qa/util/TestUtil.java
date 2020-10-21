@@ -2,20 +2,32 @@ package com.salesforce.qa.util;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Coordinates;
+import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -223,6 +235,7 @@ public class TestUtil extends TestBase{
 		List<WebElement> webElementList = null ;
 		if(isElementPresent(locator,SHORTWAIT))
 		{
+			flash(driver, locator);
 			webElementList = driver.findElements(locator);
 		}
 		return webElementList;
@@ -264,5 +277,50 @@ public class TestUtil extends TestBase{
 //		
 //		return path;
 //	}
+	
+	
+	public void switchToChildWindow()
+	{
+		//Get the main window handle
+		String mainWindowHandle = driver.getWindowHandle();
+		
+		//Switch to child window and close it
+		for (String childWindowHandle : driver.getWindowHandles()) {
+		  //If window handle is not main window handle then close it 
+		  if(!childWindowHandle.equals(mainWindowHandle)){
+			  System.out.println("Switched to child window");
+			  driver.switchTo().window(childWindowHandle);
+			  test.log(Status.PASS, MarkupHelper.createLabel("Switched to child window",ExtentColor.GREEN));
+		  // Close child windows
+		 // driver.close(); 
+		  }
+		} 
+
+		//switch back to main window
+		//driver.switchTo().window(mainWindowHandle);
+	}
+	
+	public void scrollToPageBottom() throws Exception
+	{
+		 	JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		 	//This will scroll the web page till end.		
+	        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	        Thread.sleep(2000);       
+	}
+	
+	public void scrollWebTableToBottom(By locator) throws Exception
+	{	
+		WebElement e=driver.findElement(locator);
+
+		Coordinates cor=((Locatable)e).getCoordinates();
+
+		cor.inViewPort();
+	}
+	
+	
+
+	
+	
 	
 }
