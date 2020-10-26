@@ -1,6 +1,7 @@
 package com.salesforce.qa.testcases;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.salesforce.qa.base.TestBase;
@@ -21,10 +22,11 @@ public class SetUpTest_ObjectRepository extends TestBase{
 	}
 	
 	@BeforeMethod
-	public void setUp() throws Exception
+	@Parameters("browser")
+	public void setUp(String browser) throws InterruptedException
 	{
 		test = extent.createTest("SetUp Test Object Repository Scenario");
-		initialization();
+		initialization(browser);
 		loginpage = new LoginPage();
 		util = new TestUtil();
 		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -50,7 +52,7 @@ public class SetUpTest_ObjectRepository extends TestBase{
 		Thread.sleep(12000);
 		
 		setup.verifyObjectRepository_Home();
-		Thread.sleep(3000);
+		Thread.sleep(10000);
 		
 		setup.verifyTableData_objectRepository();
 		Thread.sleep(2000);

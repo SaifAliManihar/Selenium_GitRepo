@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
@@ -52,18 +53,23 @@ public class TestBase {
 		}
 	}
 	
-	public static void initialization(){
+	public static void initialization(String browser){
 		String browserName = prop.getProperty("browser");
 		
-		if(browserName.equals("chrome"))
+		if(browser.equals("chrome"))
 		{
 			System.setProperty("webdriver.chrome.driver", filePath+"\\drivers\\chromedriver.exe");
 			driver = new ChromeDriver();			
 		}
-		else if(browserName.equals("firefox"))
+		else if(browser.equals("firefox"))
 		{
 			System.setProperty("webdriver.gecko.driver", filePath+"\\drivers\\geckodriver.exe");
 			driver = new FirefoxDriver();
+		}
+		else if(browser.equals("edge"))
+		{
+			System.setProperty("webdriver.edge.driver", filePath+"\\drivers\\msedgedriver.exe");
+			driver = new EdgeDriver();
 		}
 			
 		driver.manage().window().maximize();
@@ -94,6 +100,7 @@ public class TestBase {
 //		htmlReporter.config().setTheme(Theme.STANDARD);
 		
 		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")+"\\test-output\\Test_Automaton_Report_"+getCurrentTime()+".html");
+		//htmlReporter = new ExtentHtmlReporter(prop.getProperty("outputpath")+"\\Test_Automaton_Report_"+getCurrentTime()+".html");
 		htmlReporter.config().setChartVisibilityOnOpen(true);
 		htmlReporter.config().setDocumentTitle("Automation Test Report for Salesforce App");
 		htmlReporter.config().setReportName("Test Report for Salesforce App");//testContext.getName()+

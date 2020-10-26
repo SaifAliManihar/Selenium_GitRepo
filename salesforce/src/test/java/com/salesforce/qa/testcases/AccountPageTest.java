@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.salesforce.qa.base.TestBase;
@@ -22,10 +23,11 @@ public class AccountPageTest extends TestBase{
 	}
 	
 	@BeforeMethod
-	public void setUp() throws Exception
+	@Parameters("browser")
+	public void setUp(String browser) throws InterruptedException
 	{
 		test = extent.createTest("Create Account And Edit Acount");
-		initialization();
+		initialization(browser);
 		loginpage = new LoginPage();
 		util = new TestUtil();
 		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -64,7 +66,7 @@ public class AccountPageTest extends TestBase{
 		Thread.sleep(7000);
 		
 		util.refreshBrowser();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		loginpage.logOffAccount();
 	}
 	

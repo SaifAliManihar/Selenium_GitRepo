@@ -41,6 +41,7 @@ public class WriteToExcel extends TestBase{
 	public String timeStamp = new SimpleDateFormat("YYYY_MM_dd_HH_mm_ss").format(new Date());
 	
 	String filePath = System.getProperty("user.dir")+"\\test-output\\";
+	//String filePath = prop.getProperty("outputpath")+"\\";
 			//"C://Users//saif2//Desktop//excel//";
 	
 	int rowNum = 1;

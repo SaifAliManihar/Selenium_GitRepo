@@ -43,7 +43,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<forkCount>0</forkCount>
 					<suiteXmlFiles>
 						<!-- TestNG suite XML files -->
 						<suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
