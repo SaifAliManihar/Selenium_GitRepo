@@ -40,7 +40,7 @@ public class WriteToExcel extends TestBase{
 	public HSSFWorkbook workbook;
 	public String timeStamp = new SimpleDateFormat("YYYY_MM_dd_HH_mm_ss").format(new Date());
 	
-	String filePath = System.getProperty("user.dir")+"\\test-output\\";
+	String filePath = System.getProperty("user.dir")+"\\";
 	//String filePath = prop.getProperty("outputpath")+"\\";
 			//"C://Users//saif2//Desktop//excel//";
 	
@@ -110,7 +110,7 @@ public class WriteToExcel extends TestBase{
 		System.out.println("Total Rows Table::"+totalDataSet);
 		
 		//iterating r number of rows
-		for (int r = 1; r < totalDataSet; r++) {
+		for (int r = 1; r <= totalDataSet; r++) {
 			HSSFRow row = sheet.createRow(r);
 			
 			// iterating c number of columns

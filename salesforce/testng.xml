@@ -6,21 +6,20 @@
 		<listener class-name="com.salesforce.qa.base.TestListener" />
 	</listeners> -->
      
-<!--  <test name="Salesforce App Test Cases - Chrome Browser">
-  <parameter name="browser" value="chrome" />
+  <test name="Salesforce App Test Cases - Chrome Browser">
   	<classes>
-     	<class name="com.salesforce.qa.testcases.LoginPageTest"/>
+    	<class name="com.salesforce.qa.testcases.LoginPageTest"/>
       	<class name="com.salesforce.qa.testcases.AccountPageTest"/>
       	<class name="com.salesforce.qa.testcases.SetUpTest_ObjectRepository"/>
     </classes>
-  </test> -->
+  </test> 
   
-  <test name="Salesforce App Test Cases - Edge Browser">
+ <!--  <test name="Salesforce App Test Cases - Edge Browser">
   <parameter name="browser" value="edge" />
   	<classes>
      	<class name="com.salesforce.qa.testcases.LoginPageTest"/>
       	<class name="com.salesforce.qa.testcases.AccountPageTest"/>
       	<class name="com.salesforce.qa.testcases.SetUpTest_ObjectRepository"/>
     </classes>
-  </test> 
+  </test>  -->
 </suite>

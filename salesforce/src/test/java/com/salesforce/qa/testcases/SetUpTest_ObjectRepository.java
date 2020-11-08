@@ -22,11 +22,10 @@ public class SetUpTest_ObjectRepository extends TestBase{
 	}
 	
 	@BeforeMethod
-	@Parameters("browser")
-	public void setUp(String browser) throws InterruptedException
+	public void setUp() throws InterruptedException
 	{
 		test = extent.createTest("SetUp Test Object Repository Scenario");
-		initialization(browser);
+		initialization();
 		loginpage = new LoginPage();
 		util = new TestUtil();
 		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));
@@ -57,6 +56,29 @@ public class SetUpTest_ObjectRepository extends TestBase{
 		setup.verifyTableData_objectRepository();
 		Thread.sleep(2000);
 		
+	}
+	
+	@Test(priority=2)
+	public void verifySetUpScenaio_objectRepository_eachObject() throws Exception
+	{
+		setup.clickSetUpIcon();
+		Thread.sleep(4000);
+		
+		setup.clickSetUpLink();
+		Thread.sleep(5000);
+		
+		util.switchToChildWindow();
+		
+		setup.verifySetUpHomePage();
+		
+		setup.clickObjectManagerLink();		
+		Thread.sleep(12000);
+		
+		setup.verifyObjectRepository_Home();
+		Thread.sleep(10000);
+		
+		setup.verifyTableData_objectRepository_eachObject();
+		Thread.sleep(5000);
 	}
 
 }

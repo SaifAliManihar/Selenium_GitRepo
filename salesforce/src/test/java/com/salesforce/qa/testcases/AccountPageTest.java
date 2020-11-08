@@ -23,11 +23,10 @@ public class AccountPageTest extends TestBase{
 	}
 	
 	@BeforeMethod
-	@Parameters("browser")
-	public void setUp(String browser) throws InterruptedException
+	public void setUp() throws InterruptedException
 	{
 		test = extent.createTest("Create Account And Edit Acount");
-		initialization(browser);
+		initialization();
 		loginpage = new LoginPage();
 		util = new TestUtil();
 		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));

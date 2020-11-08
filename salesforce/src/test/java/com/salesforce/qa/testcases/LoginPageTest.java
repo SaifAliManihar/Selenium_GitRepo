@@ -21,11 +21,10 @@ public class LoginPageTest extends TestBase{
 	}
 	
 	@BeforeMethod
-	@Parameters("browser")
-	public void setUp(String browser)
+	public void setUp()
 	{
 		test = extent.createTest("Login Functionality Testing");
-		initialization(browser);
+		initialization();
 		loginpage = new LoginPage();
 		util = new TestUtil();
 	}

@@ -36,6 +36,11 @@ public class SetUP extends TestBase{
 	
 	By imageLink_table = By.xpath("//tr//a[contains(@href,'Image')]");
 	
+	By availableListData = By.xpath("//div[contains(@class,'navigation-list')]//li");
+	
+	By tableLastElement = By.xpath("(//table[contains(@class,'uiVirtualData')]//tbody//tr)[last()]");
+	
+	By objectTableDataCount = By.xpath("//span[contains(.,' Items')]");
 	
 	
 	public void clickSetUpIcon()
@@ -53,16 +58,9 @@ public class SetUP extends TestBase{
 	
 	public void clickSetUpLink()
 	{
-		//if(util.isElementPresent(setUp_lnk, 5))
-	//	{
-			System.out.println("SetUp Link present");
-			test.log(Status.PASS, MarkupHelper.createLabel("Set Up Link is present", ExtentColor.GREEN));
-			//util.clickElement(setUp_lnk, "SetUP Link");
-			driver.findElement(setUp_lnk).click();
-		//}else{
-		//	System.out.println("SetUp Link isn't present");
-		//	test.log(Status.FAIL, MarkupHelper.createLabel("Set Up Link is not present", ExtentColor.RED));
-		//}
+		System.out.println("SetUp Link present");
+		test.log(Status.PASS, MarkupHelper.createLabel("Set Up Link is present", ExtentColor.GREEN));
+		driver.findElement(setUp_lnk).click();
 	}
 	
 	public void verifySetUpHomePage()
@@ -116,7 +114,8 @@ public class SetUP extends TestBase{
 	
 	public void verifyTableData_objectRepository() throws Exception
 	{
-		util.scrollWebTableToBottom(imageLink_table);
+		//util.scrollWebTableToBottom(imageLink_table);
+		util.scrollWebTableToBottom(tableLastElement);
 		Thread.sleep(3000);
 		
 		List<String> tableHeaderData = new ArrayList<String>();
@@ -160,7 +159,100 @@ public class SetUP extends TestBase{
 		test.log(Status.PASS, MarkupHelper.createLabel("Object Manager Data is successfully written in the excel file with location:"+fullFilePath, ExtentColor.GREEN));
 	}
 	
+	//To Verify and capture each label under Object manager
+	public void verifyTableData_objectRepository_eachObject() throws Exception
+	{
+		List<String> tableHeader_strList = new ArrayList<String>();
+		List<String> tableBodyDataList = new ArrayList<String>();
+		
+		util.scrollWebTableToBottom(tableLastElement);
+		
+		List<WebElement> tableBody_objectManager = util.getListOfWebElement(tableObject_data);
+		Thread.sleep(5000);
+		
+		for(int i=1;i<=tableBody_objectManager.size();i++)
+		{
+			By tableBody_objectManager_header =  By.xpath("(//table[contains(@class,'VirtualData')]//tbody//tr)["+i+"]//th//a");
+			String tableBody_objectManager_header_str = util.getText(tableBody_objectManager_header);
+			System.out.println("Link name under Object Manager-->"+tableBody_objectManager_header_str);
+			
+			util.clickElement(tableBody_objectManager_header, tableBody_objectManager_header_str);
+			Thread.sleep(10000);
+			
+			List<WebElement> listOfLinksAvailable = util.getListOfWebElement(availableListData);
+			
+			for(int j=2;j<=listOfLinksAvailable.size();j++)
+			{
+				listOfLinksAvailable = util.getListOfWebElement(availableListData);
+				String linkName = listOfLinksAvailable.get(j-1).getText();
+				System.out.println("Link Name under "+tableBody_objectManager_header_str+ "::"+linkName);
+				util.clickElement(By.xpath("(//div[contains(@class,'navigation-list')]//li)["+j+"]"), linkName);
+				Thread.sleep(10000);
+				
+				if(!linkName.equals("Hierarchy Columns"))
+				{
+					List<WebElement> tableHeader_data = util.getListOfWebElement(By.xpath("//table[contains(@class,'uiVirtualData')]//thead//th"));
+					Thread.sleep(10000);
+					
+					for(int k=1;k<=tableHeader_data.size();k++)
+					{
+							String headerData = util.getText(By.xpath("(//table[contains(@class,'uiVirtualData')]//thead//th)["+k+"]"));
+							tableHeader_strList.add(headerData);
+					}
+				
+				
+					//Checking empty table data
+					String tabledataCount = util.getText(objectTableDataCount);
+					System.out.println("Table Data count::"+tabledataCount);
+					if(tabledataCount.contains("0")){
+						for(int m=1;m<=tableHeader_data.size();m++)
+						{
+							tableBodyDataList.add("-");
+						}
+						tableBodyDataList.add("$");
+					}
+					else{
+						List<WebElement> tableBody_data = util.getListOfWebElement(By.xpath("//table[contains(@class,'uiVirtualData')]//tbody//tr"));
+						String separator = "$";
+						
+						if(tableBody_data.size()!=0){
+							util.scrollWebTableToBottom(tableLastElement);					
+							for (int tb = 1; tb <= tableBody_data.size(); tb++) {
+								By tableBody_Data = By.xpath("(//table[contains(@class,'VirtualData')]//tbody//tr)[" + tb + "]//td");
+								List<WebElement> tableBodyData = util.getListOfWebElement(tableBody_Data);
+								for (WebElement tdData : tableBodyData) {
+									String tdData_str = tdData.getText();
+									tableBodyDataList.add(tdData_str);
+								}
+								tableBodyDataList.add(separator);
+							}
+							
+						}
+					}
+					
+					String fileNameToCreate = prop.getProperty("objectManagerFileName")+"_"+tableBody_objectManager_header_str+"_"+linkName;
+					//String fileNameToCreate = prop.getProperty("objectManagerFileName")+"_"+tableBody_objectManager_header_str;
+					String sheetName = linkName;
+					
+					String fullFilePath = excel.writeToExcel(tableHeader_strList,tableBodyDataList,fileNameToCreate,sheetName);
+					test.log(Status.PASS, MarkupHelper.createLabel("Object Manager Data is successfully written in the excel file with location:"+fullFilePath, ExtentColor.GREEN));
+					
+					tableHeader_strList.clear();
+					tableBodyDataList.clear();
+					
+				}
+				else{
+					continue;
+				}
+				
+				
+			}
+			clickObjectManagerLink();
+			Thread.sleep(3000);
+		}
+	}
 	
+		
 	
 	
 }

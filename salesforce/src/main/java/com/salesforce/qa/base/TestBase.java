@@ -28,6 +28,9 @@ import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.salesforce.qa.util.TestUtil;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+
 public class TestBase {
 	
 	public static WebDriver driver;
@@ -44,7 +47,7 @@ public class TestBase {
 	{
 		try{
 			prop = new Properties();			
-			FileInputStream ip = new FileInputStream(filePath+"\\src\\main\\java\\com\\salesforce\\qa\\config\\config.properties");
+			FileInputStream ip = new FileInputStream(filePath+"\\config.properties");
 			prop.load(ip);
 			
 		}catch(Exception e)
@@ -53,22 +56,25 @@ public class TestBase {
 		}
 	}
 	
-	public static void initialization(String browser){
+	public static void initialization(){
 		String browserName = prop.getProperty("browser");
 		
-		if(browser.equals("chrome"))
+		if(browserName.equals("chrome"))
 		{
-			System.setProperty("webdriver.chrome.driver", filePath+"\\drivers\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", filePath+"\\drivers\\chromedriver.exe");
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();			
 		}
-		else if(browser.equals("firefox"))
+		else if(browserName.equals("firefox"))
 		{
-			System.setProperty("webdriver.gecko.driver", filePath+"\\drivers\\geckodriver.exe");
+			//System.setProperty("webdriver.gecko.driver", filePath+"\\drivers\\geckodriver.exe");
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
-		else if(browser.equals("edge"))
+		else if(browserName.equals("edge"))
 		{
-			System.setProperty("webdriver.edge.driver", filePath+"\\drivers\\msedgedriver.exe");
+			//System.setProperty("webdriver.edge.driver", filePath+"\\drivers\\msedgedriver.exe");
+			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
 			
@@ -87,19 +93,8 @@ public class TestBase {
 	
 	@BeforeSuite
 	public void beforeSuiteSetUp() {
-		//testContext.getName()+
-//		String reportFileName = "Test_Automaton_Report_"+getCurrentTime();//testContext.getName()+
-//		htmlReporter = new ExtentHtmlReporter(filePath + "\\test-output\\"+reportFileName+".html");
-//		extent = new ExtentReports();
-//		extent.attachReporter(htmlReporter);
-//		
-//		htmlReporter.config().setChartVisibilityOnOpen(true);
-//		htmlReporter.config().setDocumentTitle("Automation Test Report for Salesforce App");
-//		htmlReporter.config().setReportName("Test Report for Salesforce App");//testContext.getName()+
-//		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
-//		htmlReporter.config().setTheme(Theme.STANDARD);
 		
-		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")+"\\test-output\\Test_Automaton_Report_"+getCurrentTime()+".html");
+		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")+"\\Test_Automaton_Report_"+getCurrentTime()+".html");
 		//htmlReporter = new ExtentHtmlReporter(prop.getProperty("outputpath")+"\\Test_Automaton_Report_"+getCurrentTime()+".html");
 		htmlReporter.config().setChartVisibilityOnOpen(true);
 		htmlReporter.config().setDocumentTitle("Automation Test Report for Salesforce App");
@@ -122,11 +117,6 @@ public class TestBase {
 		extent.flush();
 	}
 	
-//	@AfterTest
-//	public void closeEnv(){
-//		TestUtil.closeBrowser(driver);
-//	}
-	
 	@AfterMethod
 	public void getResult(ITestResult result) {
 		//test=extent.createTest(result.getName());
@@ -142,8 +132,6 @@ public class TestBase {
 		}
 		TestUtil.closeBrowser(driver);
 	}
-	
-	
 	
 	
 }
