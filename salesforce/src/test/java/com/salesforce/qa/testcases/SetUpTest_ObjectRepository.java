@@ -34,33 +34,34 @@ public class SetUpTest_ObjectRepository extends TestBase{
 		setup = new SetUP();
 	}
 	
-	@Test(priority=1)
-	public void verifySetUpScenaio_objectRepository() throws Exception
-	{
-		setup.clickSetUpIcon();
-		Thread.sleep(4000);
-		
-		setup.clickSetUpLink();
-		Thread.sleep(5000);
-		
-		util.switchToChildWindow();
-		
-		setup.verifySetUpHomePage();
-		
-		setup.clickObjectManagerLink();		
-		Thread.sleep(12000);
-		
-		setup.verifyObjectRepository_Home();
-		Thread.sleep(10000);
-		
-		setup.verifyTableData_objectRepository();
-		Thread.sleep(2000);
-		
-	}
+//	@Test(priority=1)
+//	public void verifySetUpScenaio_objectRepository() throws Exception
+//	{
+//		setup.clickSetUpIcon();
+//		Thread.sleep(4000);
+//		
+//		setup.clickSetUpLink();
+//		Thread.sleep(5000);
+//		
+//		util.switchToChildWindow();
+//		
+//		setup.verifySetUpHomePage();
+//		
+//		setup.clickObjectManagerLink();		
+//		Thread.sleep(12000);
+//		
+//		setup.verifyObjectRepository_Home();
+//		Thread.sleep(10000);
+//		
+//		setup.verifyTableData_objectRepository();
+//		Thread.sleep(2000);
+//		
+//	}
 	
 	@Test(priority=2)
 	public void verifySetUpScenaio_objectRepository_eachObject() throws Exception
 	{
+		Thread.sleep(2000);
 		setup.clickSetUpIcon();
 		Thread.sleep(4000);
 		

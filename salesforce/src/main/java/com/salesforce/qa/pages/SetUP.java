@@ -230,8 +230,8 @@ public class SetUP extends TestBase{
 						}
 					}
 					
-					String fileNameToCreate = prop.getProperty("objectManagerFileName")+"_"+tableBody_objectManager_header_str+"_"+linkName;
-					//String fileNameToCreate = prop.getProperty("objectManagerFileName")+"_"+tableBody_objectManager_header_str;
+					//String fileNameToCreate = prop.getProperty("objectManagerFileName")+"_"+tableBody_objectManager_header_str+"_"+linkName;
+					String fileNameToCreate = prop.getProperty("objectManagerFileName")+"_"+tableBody_objectManager_header_str;
 					String sheetName = linkName;
 					
 					String fullFilePath = excel.writeToExcel(tableHeader_strList,tableBodyDataList,fileNameToCreate,sheetName);
@@ -248,7 +248,7 @@ public class SetUP extends TestBase{
 				
 			}
 			clickObjectManagerLink();
-			Thread.sleep(3000);
+			Thread.sleep(7000);
 		}
 	}
 	

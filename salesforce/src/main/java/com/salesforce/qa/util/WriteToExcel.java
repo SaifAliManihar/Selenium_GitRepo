@@ -85,6 +85,32 @@ public class WriteToExcel extends TestBase{
 			FileInputStream inputStream = new FileInputStream(file);
 			workbook = new HSSFWorkbook(inputStream);
 			sheet = workbook.getSheet(sheetName);
+			if(sheet==null)
+			{
+				sheet = workbook.createSheet(sheetName);
+				
+				Font headerFont = workbook.createFont();
+				((HSSFFont) headerFont).setBold(true);
+				headerFont.setFontHeightInPoints((short)12);
+				headerFont.setColor(IndexedColors.BLACK.getIndex());
+				
+				
+				//Create the cell style for font
+				HSSFCellStyle headerCellStyle = workbook.createCellStyle();
+				headerCellStyle.setFont(headerFont);
+				
+				//Create Row
+				HSSFRow headerRow = sheet.createRow(0);
+				
+				//Create Cell
+				for(int i=0;i<header.size();i++)
+				{
+					cell = headerRow.createCell(i);
+					cell.setCellStyle(headerCellStyle);
+					cell.setCellValue(header.get(i));
+					sheet.autoSizeColumn(i);
+				}
+			}
 		}
 
 		List<String> tempTableData = tableData;
